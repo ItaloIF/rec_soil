@@ -2,10 +2,10 @@ from collections import defaultdict
 f = open(f_name,'r')
 
 # types of nodes and elements
-N_dic = {(0,2): 1, (0,3): 1, (0,4): 1, (0,5): 1,
-         (1,2): 1, (1,3): 1, (1,4): 1}
-# 1 : damp
-E_dic = {(2,1): 1}
+N_dic = {(0,2): 1, (0,3): 1, (0,4): 1, (0,5): 1, (0,6): 1, (0,7): 1,
+         (1,2): 1, (1,4): 1, (1,6): 1, (1,7): 1, (1,8): 1}
+# 1 : damp boundary
+E_dic = {(2,1): 1, (2,2): 2}
 # i : soil_i (material id)
 
 N_dic = defaultdict(lambda:0, N_dic)

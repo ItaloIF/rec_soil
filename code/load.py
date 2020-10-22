@@ -12,7 +12,7 @@ ops.pattern('Plain', 1, tsTag, '-fact', 1.0)
 ops.load(id_nload, Fx, Fy)
 
 # constraints nodes
-ops.equalDOF(1, 6, *[1, 2])
-ops.equalDOF(1, 7, *[1, 2])
-ops.equalDOF(1, 300, *[1, 2])
+ops.equalDOF(1, 8, *[1, 2])
+ops.equalDOF(1, 9, *[1, 2])
 ops.equalDOF(1, 301, *[1, 2])
+ops.equalDOF(1, 302, *[1, 2])
