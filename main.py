@@ -14,7 +14,7 @@ exec(open('code/units.py').read())
 exec(open('code/mat_prop.py').read())
 
 # read 'msh' file
-f_name = 'mesh_2.msh'
+f_name = 'mesh_3.msh'
 exec(open('code/read_msh.py').read())
 n_ele = len(Ele)
 
@@ -55,5 +55,5 @@ ops.algorithm('Linear')
 ops.integrator('Newmark', 0.5, 0.25)
 ops.analysis('Transient')
 
-exec(open('code/rec.py').read())
+#exec(open('code/rec.py').read())
 ops.analyze(10,0.001)
