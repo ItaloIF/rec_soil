@@ -1,6 +1,6 @@
 import openseespy.opensees as ops
 import openseespy.postprocessing.Get_Rendering as opsplt
-import math, subprocess
+import math, subprocess, paramiko
 
 ops.wipe()
 ops.model('basic', '-ndm', 2, '-ndf', 2)
