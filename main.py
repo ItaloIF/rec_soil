@@ -6,7 +6,7 @@ ops.wipe()
 ops.model('basic', '-ndm', 2, '-ndf', 2)
 
 # paraview out
-#exec(open('code/out_paraview.py').read())
+exec(open('code/out_paraview.py').read())
 
 exec(open('code/units.py').read())
 
@@ -56,4 +56,4 @@ ops.integrator('Newmark', 0.5, 0.25)
 ops.analysis('Transient')
 
 exec(open('code/rec.py').read())
-ops.analyze(100,0.001)
+ops.analyze(10,0.001)
