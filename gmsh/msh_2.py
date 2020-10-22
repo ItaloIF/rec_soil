@@ -1,11 +1,6 @@
+# mesh using transfinite
 import numpy as np
 import gmsh
-
-# profile file (L,Z)(m)
-f_name = 'profile.txt'
-C_pf = np.loadtxt(f_name, skiprows=1)
-n_pf = len(C_pf[:,1])
-id_m = 104
 
 # initial commands
 gmsh.initialize()
@@ -13,35 +8,48 @@ gmsh.clear()
 gmsh.option.setNumber('General.Terminal', 1)
 m_tag = 'mesh_2'
 gmsh.model.add(m_tag)
-gmo = gmsh.model.occ
+gmg = gmsh.model.geo
 
-# define points
-ms = 2 # mesh size
-for i in range(n_pf):
-    gmo.addPoint(C_pf[i,0], C_pf[i,1], 0, ms, i+1)
+# geometry (m)
+L = 50
+H = 50
+
+# define points 
+ms = 1 # mesh size
+gmg.addPoint(0, 0, 0, ms, 1) # load point
+gmg.addPoint(L, 0, 0, ms, 2)
+gmg.addPoint(L, -H, 0, ms, 3)
+gmg.addPoint(-L, -H, 0, ms, 4)
+gmg.addPoint(-L, 0, 0, ms, 5)
 
 # define lines
-gmo.addLine(1, 2, 1)
-gmo.addSpline(range(2,id_m-1), 2)
-gmo.addLine(id_m-2, id_m-1, 3)
-gmo.addLine(id_m-1, id_m, 4)
-gmo.addLine(id_m, id_m+1, 5)
-gmo.addLine(id_m+1, id_m+2, 6)
-gmo.addSpline(range(id_m+2, n_pf), 7)
-gmo.addLine(n_pf-1, n_pf, 8)
-gmo.addLine(n_pf, 1, 9)
+gmg.addLine(1, 2, 1)
+gmg.addLine(2, 3, 2)
+gmg.addLine(3, 4, 3)
+gmg.addLine(4, 5, 4)
+gmg.addLine(5, 1, 5)
 
-gmo.addCurveLoop([1, 2, 3, 4, 5, 6, 7, 8, 9], 1)
+gmsh.model.geo.addCurveLoop([1, 2, 3, 4, 5] , 1)
 
 # define surface
-gmo.addPlaneSurface([1], 1)
+gmsh.model.geo.addPlaneSurface([1], 1)
+
+# transfinite
+tf1 = int(L/ms)
+tf2 = int(H/ms)
+gmg.mesh.setTransfiniteSurface(1,'Left',[2, 3, 4, 5])
+gmg.mesh.setTransfiniteCurve(1, tf1+1)
+gmg.mesh.setTransfiniteCurve(2, tf2+1)
+gmg.mesh.setTransfiniteCurve(3, 2*tf1+1)
+gmg.mesh.setTransfiniteCurve(4, tf2+1)
+gmg.mesh.setTransfiniteCurve(5, tf1+1)
 
 # transforme tri to  quad
-gmo.synchronize()
-gmsh.model.mesh.setRecombine(2, 1)
+gmsh.model.geo.synchronize()
+gmsh.model.geo.mesh.setRecombine(2, 1)
 
 #mesh generate
-gmo.synchronize()
+gmsh.model.geo.synchronize()
 gmsh.model.mesh.generate(2)
 gmsh.fltk.run()
 gmsh.write(m_tag + '.msh')

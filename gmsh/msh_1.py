@@ -1,29 +1,34 @@
 import numpy as np
 import gmsh
 
-# profile file (L,Z)(m)
-f_name = 'profile.txt'
-C_pf = np.loadtxt(f_name, skiprows=1)
-n_pf = len(C_pf[:,1])
-
 # initial commands
 gmsh.initialize()
 gmsh.clear()
 gmsh.option.setNumber('General.Terminal', 1)
 m_tag = 'mesh_1'
 gmsh.model.add(m_tag)
+gmg = gmsh.model.geo
 
-# define points
+# geometry (m)
+L = 50
+H = 50
+
+# define points 
 ms = 1 # mesh size
-for i in range(n_pf):
-    gmsh.model.geo.addPoint(C_pf[i,0], C_pf[i,1], 0, ms, i+1)
+gmg.addPoint(0, 0, 0, ms, 1) # load point
+gmg.addPoint(L, 0, 0, ms, 2)
+gmg.addPoint(L, -H, 0, ms, 3)
+gmg.addPoint(-L, -H, 0, ms, 4)
+gmg.addPoint(-L, 0, 0, ms, 5)
 
 # define lines
-for i in range(n_pf-1):
-    gmsh.model.geo.addLine(i+1, i+2, i+1)
-gmsh.model.geo.addLine(n_pf, 1, n_pf)
+gmg.addLine(1, 2, 1)
+gmg.addLine(2, 3, 2)
+gmg.addLine(3, 4, 3)
+gmg.addLine(4, 5, 4)
+gmg.addLine(5, 1, 5)
 
-gmsh.model.geo.addCurveLoop([*range(1, n_pf+1, 1)] , 1)
+gmsh.model.geo.addCurveLoop([1, 2, 3, 4, 5] , 1)
 
 # define surface
 gmsh.model.geo.addPlaneSurface([1], 1)
@@ -35,7 +40,7 @@ gmsh.model.geo.mesh.setRecombine(2, 1)
 #mesh generate
 gmsh.model.geo.synchronize()
 gmsh.model.mesh.generate(2)
-#gmsh.fltk.run()
+gmsh.fltk.run()
 gmsh.write(m_tag + '.msh')
 gmsh.finalize()
 

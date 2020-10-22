@@ -2,8 +2,8 @@ from collections import defaultdict
 f = open(f_name,'r')
 
 # types of nodes and elements
-N_dic = {(0,1): 1, (0,2): 1, (0,368): 1, (0,369): 1,
-         (1,1): 1, (1,8): 1, (1,9): 1}
+N_dic = {(0,2): 1, (0,3): 1, (0,4): 1, (0,5): 1,
+         (1,2): 1, (1,3): 1, (1,4): 1}
 # 1 : damp
 E_dic = {(2,1): 1}
 # i : soil_i (material id)
@@ -39,4 +39,3 @@ for i in range(n_ent):
     else:
         for i in range(Data_ent[3]):
            f.readline()
-# delete nodes 3:101, 107:367 (nodes of Spline's)
