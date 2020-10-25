@@ -12,12 +12,12 @@ gmsh.model.add(m_tag)
 gmg = gmsh.model.geo
 
 # geometry (m)
-L = 50
+L = 100
 H1 = 50
-H2 = 80
+H2 = 100
 
 # define points 
-ms = 1 # mesh size
+ms = 10 # mesh size
 gmg.addPoint(0, 0, 0, ms, 1) # load point
 gmg.addPoint(L, 0, 0, ms, 2)
 gmg.addPoint(L, -H1, 0, ms, 3)
@@ -32,13 +32,13 @@ gmg.addLine(2, 3, 2)
 gmg.addLine(3, 4, 3)
 gmg.addLine(4, 5, 4)
 gmg.addLine(5, 1, 5)
-gmg.addLine(4, 7, 6)
-gmg.addLine(7, 6, 7)
-gmg.addLine(6, 3, 8)
+gmg.addLine(3, 6, 6)
+gmg.addLine(6, 7, 7)
+gmg.addLine(7, 4, 8)
 
 
 gmg.addCurveLoop([1, 2, 3, 4, 5] , 1)
-gmg.addCurveLoop([3, 6, 7, 8] , 2)
+gmg.addCurveLoop([-3, 6, 7, 8] , 2)
 
 
 # define surface
