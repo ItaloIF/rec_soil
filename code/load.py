@@ -11,8 +11,8 @@ ops.timeSeries('Trig', tsTag, ti, tf, period, '-factor', 1.0)
 ops.pattern('Plain', 1, tsTag, '-fact', 1.0)
 ops.load(id_nload, Fx, Fy)
 
-# constraints nodes
+# constraints nodes (depends on msh file)
 ops.equalDOF(1, 8, *[1, 2])
 ops.equalDOF(1, 9, *[1, 2])
-ops.equalDOF(1, 501, *[1, 2])
-ops.equalDOF(1, 502, *[1, 2])
+ops.equalDOF(1, 251, *[1, 2])
+ops.equalDOF(1, 252, *[1, 2])

@@ -17,14 +17,14 @@ H1 = 50
 H2 = 100
 
 # define points 
-ms = 10 # mesh size
+ms = 2 # mesh size
 gmg.addPoint(0, 0, 0, ms, 1) # load point
-gmg.addPoint(L, 0, 0, ms, 2)
-gmg.addPoint(L, -H1, 0, ms, 3)
-gmg.addPoint(-L, -H1, 0, ms, 4)
-gmg.addPoint(-L, 0, 0, ms, 5)
-gmg.addPoint(L, -H2, 0, ms, 6)
-gmg.addPoint(-L, -H2, 0, ms, 7)
+gmg.addPoint(-L, 0, 0, ms, 2)
+gmg.addPoint(-L, -H1, 0, ms, 3)
+gmg.addPoint(L, -H1, 0, ms, 4)
+gmg.addPoint(L, 0, 0, ms, 5)
+gmg.addPoint(-L, -H2, 0, ms, 6)
+gmg.addPoint(L, -H2, 0, ms, 7)
 
 # define lines
 gmg.addLine(1, 2, 1)
@@ -70,6 +70,6 @@ gmsh.model.geo.mesh.setRecombine(2, 2)
 #mesh generate
 gmsh.model.geo.synchronize()
 gmsh.model.mesh.generate(2)
-gmsh.fltk.run()
 gmsh.write(m_tag + '.msh')
+gmsh.fltk.run()
 gmsh.finalize()

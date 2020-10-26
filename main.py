@@ -1,12 +1,14 @@
 import openseespy.opensees as ops
-import openseespy.postprocessing.Get_Rendering as opsplt
-import math, subprocess, paramiko
+import os
+from collections import defaultdict
+#import openseespy.postprocessing.Get_Rendering as opsplt
 
+# set model builder
 ops.wipe()
 ops.model('basic', '-ndm', 2, '-ndf', 2)
 
 # paraview out
-data_name = 'outputs/model_1'
+data_name = 'out/model_1'
 exec(open('code/out_paraview.py').read())
 
 exec(open('code/units.py').read())
@@ -57,4 +59,8 @@ ops.integrator('Newmark', 0.5, 0.25)
 ops.analysis('Transient')
 
 #exec(open('code/rec.py').read())
-ops.analyze(200,0.001)
+
+# timers
+ops.start()
+ops.analyze(10,0.001)
+ops.stop()

@@ -1,4 +1,3 @@
-from collections import defaultdict
 f = open(f_name,'r')
 
 # types of nodes and elements
@@ -39,3 +38,4 @@ for i in range(n_ent):
     else:
         for i in range(Data_ent[3]):
            f.readline()
+f.close()
