@@ -18,7 +18,7 @@ exec(open('code/units.py').read())
 exec(open('code/mat_prop.py').read())
 
 # read 'msh' file
-f_name = 'gmsh/mesh_3.msh'
+f_name = 'gmsh/mesh_4.msh'
 exec(open('code/read_msh.py').read())
 n_ele = len(Ele)
 
