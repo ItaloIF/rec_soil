@@ -1,5 +1,6 @@
 import openseespy.opensees as ops
 import os
+import math
 from collections import defaultdict
 #import openseespy.postprocessing.Get_Rendering as opsplt
 
@@ -46,7 +47,8 @@ if (pid == 0):
     #opsplt.plot_model()
 
     # make viscous boundarys
-    exec(open('code/bound.py').read())
+    #exec(open('code/bound.py').read())
+    exec(open('code/fix_bound.py').read()))
 
     # rayleigh damping
     #ops.rayleigh(a0,0,0,a1)
