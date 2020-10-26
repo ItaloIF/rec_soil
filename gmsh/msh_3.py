@@ -7,7 +7,7 @@ import gmsh
 gmsh.initialize()
 gmsh.clear()
 gmsh.option.setNumber('General.Terminal', 1)
-m_tag = 'mesh_3'
+m_tag = 'mesh_4'
 gmsh.model.add(m_tag)
 gmg = gmsh.model.geo
 
@@ -17,7 +17,7 @@ H1 = 50
 H2 = 100
 
 # define points 
-ms = 2 # mesh size
+ms = 0.5 # mesh size
 gmg.addPoint(0, 0, 0, ms, 1) # load point
 gmg.addPoint(-L, 0, 0, ms, 2)
 gmg.addPoint(-L, -H1, 0, ms, 3)
