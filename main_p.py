@@ -48,7 +48,7 @@ if (pid == 0):
 
     # make viscous boundarys
     #exec(open('code/bound.py').read())
-    exec(open('code/fix_bound.py').read()))
+    exec(open('code/fix_bound.py').read())
 
     # rayleigh damping
     #ops.rayleigh(a0,0,0,a1)
