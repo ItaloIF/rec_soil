@@ -1,3 +1,4 @@
+#exec(open('main.py').read())
 import openseespy.opensees as ops
 import os
 import math
@@ -9,7 +10,7 @@ ops.wipe()
 ops.model('basic', '-ndm', 2, '-ndf', 2)
 
 # paraview out
-data_name = 'out/model_1'
+data_name = 'out/model_16'
 exec(open('code/out_paraview.py').read())
 
 exec(open('code/units.py').read())
@@ -36,13 +37,13 @@ exec(open('code/damp.py').read())
 for i in range(n_ele):
     if (Ele[i][0] > 0):
         ops.element('quad', i+1, *Ele[i][2:], b, 'PlaneStrain', Ele[i][0])
-        ops.setElementRayleighDampingFactors(i+1,a0,0,0,a1)
+#        ops.setElementRayleighDampingFactors(i+1,a0,0,0,a1)
 
 #opsplt.plot_model()
 
 # make viscous boundarys
-#exec(open('code/bound.py').read())
-exec(open('code/fix_bound.py').read())
+exec(open('code/vis_bound.py').read())
+#exec(open('code/fix_bound.py').read())
 
 # rayleigh damping
 #ops.rayleigh(a0,0,0,a1)
@@ -60,10 +61,12 @@ ops.algorithm('Linear')
 ops.integrator('Newmark', 0.5, 0.25)
 ops.analysis('Transient')
 
+# records
 #exec(open('code/rec.py').read())
 
 # timers
 ops.start()
-ops.analyze(10,0.001)
+for i in range(400):
+    ops.analyze(1,0.001)
+    print(i)
 ops.stop()
-print(ops.nodeDisp(1,1))

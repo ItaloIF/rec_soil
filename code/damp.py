@@ -1,4 +1,4 @@
-# rayleigh damping 
+# rayleigh damping parameters
 bi = 0.02
 bj = 0.02
 wi = 2*math.pi*0.2 #rad/s
